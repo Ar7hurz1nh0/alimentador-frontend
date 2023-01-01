@@ -1,12 +1,13 @@
-import Search from './search'
-import { Dropdown } from './dropdown'
-import Darkmode from './darkmode'
-import { Menu, Transition } from '@headlessui/react'
+import { useState } from 'react'
+import { Tab } from '@headlessui/react'
+import Search from './search';
+import Darkmode from './darkmode';
+import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react'
 import { NavigateFunction, useNavigate } from 'react-router'
 
-interface HeaderProps {
-  active: -1 | 1 | 2 | 3
+export interface HeaderProps {
+  active: -1 | 1 | 2 | 3 | 4 | 5
 }
 
 interface MenuItems {
@@ -22,8 +23,9 @@ const Items: MenuItems['items'] = [
   { href: '/', label: 'Home'},
   { href: '/list', label: 'Users'},
   { href: '/post', label: 'Posts'},
+  { href: '/build', label: 'Build'},
+  //{ href: '/dev', label: 'Dev'},
 ]
-
 
 function DropdownMenu(props: MenuItems) {
   return (
@@ -66,21 +68,19 @@ function DropdownMenu(props: MenuItems) {
   )
 }
 
-import { useState } from 'react'
-import { Tab } from '@headlessui/react'
 
 function Tabs(props: MenuItems) {
   let [categories] = useState(props.items)
 
   return (
-    <div className="w-full px-2 sm:px-0 dark:bg-opacity-75 bg-opacity-75 backdrop-blur-md">
+    <div className="max-h-min">
       <Tab.Group defaultIndex={props.active -1}>
-        <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 backdrop-blur-md" >
-          {categories.map((tab, index) => (
+        <Tab.List className="flex space-x-10 rounded-xl p-1 backdrop-blur-md bg-slate-50 dark:bg-slate-800 bg-opacity-75" >
+          {categories.map(tab => (
             <Tab
               key={tab.label}
               onClick={() => props.navigate(tab.href)}
-              className={({ selected }) => `w-full backdrop-blur-md rounded-lg px-4 py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 ${selected ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white dark:bg-opacity-90 bg-opacity-90}'}`}
+              className={({ selected }) => `w-full backdrop-blur-md dark:bg-opacity-50 bg-opacity-50 rounded-lg px-4 py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 ${selected ? 'bg-white shadow dark:bg-gray-800' : 'text-blue-500 bg-gray-200 dark:bg-gray-900 hover:bg-white/[0.12] hover:text-white}'}`}
             >
               {tab.label}
             </Tab>
@@ -93,11 +93,11 @@ function Tabs(props: MenuItems) {
 
 export default function Header(props: HeaderProps) {
   const navigate = useNavigate()
-  const imgsrc='/logo.svg', title='CDMD'
-  return <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-zinc-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 sticky dark:bg-opacity-25 bg-opacity-50 backdrop-blur-md">
+  const imgsrc='/logo.png', title=''
+  return <nav className="bg-zinc-200 px-2 sm:px-4 py-2.5 dark:bg-zinc-800 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 sticky dark:bg-opacity-50 bg-opacity-50 backdrop-blur-[8px] rounded-3xl">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
-  <a href="javascript:void 0" className="flex items-center" onClick={() => navigate('/')}>
-      <img src={imgsrc} className="h-6 mr-3 sm:h-9" alt={title + ' Logo'} />
+  <a href='/' className="flex items-center" onClick={e => {e.preventDefault(); navigate('/')}}>
+      <img src={imgsrc} className="mr-3 h-10 pl-3 max-sm:h-9 max-sm:pl-0" alt={title + ' Logo'} />
       <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden md:block">{title}</span>
   </a>
   <div className="flex md:order-2 space-x-1">
@@ -112,7 +112,7 @@ export default function Header(props: HeaderProps) {
       <DropdownMenu className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600' data-collapse-toggle="navbar-sticky" aria-controls="navbar-sticky" aria-expanded="false" items={Items} active={-1} navigate={navigate}/>
   </div>
   <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-    <div className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 dark:bg-gray-900 dark:border-gray-700 dark:bg-opacity-75 bg-opacity-75">
+    <div className="flex flex-col mt-4 border border-gray-100 rounded-lg bg-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 bg-transparent dark:bg-transparent">
       <Tabs items={Items} navigate={navigate} active={props.active} />
     </div>
   </div>

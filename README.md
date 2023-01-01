@@ -1,14 +1,13 @@
-## Atention!!
-This is a simple preact app with a simple python api backend. It's not meant to be used in production, but it can be used as a starting point for a production app. With that said, here's the rest of the documentation
+# Opa, bom dia! :D
 
-# What is this?
-This is a framework that searches being as lightweight as possible, improving the user experience by maintaining the state between pages, while being easy to the developer to maintain and develop new pages
+Esse projeto foi desenvolvido no linux, e pode não funcionar apropriadamente em outros sistemas operacionais. Isso dito, o maior problema seria a fase de build, onde o projeto usa um shell script para mover arquivos nas posições corretas para produção. O script foi feito para linux, e muito provavelmente não funcionará em sistemas opracionais que não sejam linux. (`finish-build.sh`)
 
-# How does routes work
-It uses system file routing, inside the templates folder.
-- The folder `pages` is for the frontend or `.jsx` files.
-- The folder `api` is for the backend/api or `.py` files.
+## Como rodar o projeto
 
-# Currently known bugs
-- The react in the `.jsx` isn't very... reactive. This means that preact doens't re-render the page when something changes. Pretty static for something called after reaction
-- This is it for now I think. But if you found one, you can [create a new issue](https://github.com/Ar7hurz1nh0/fract/issues/new)
+Se você não excluiu nenhum arquivo da pasta `templates` e `static`, rodar o projeto é meramente iniciar o `index.py` usando pelo menos python3
+
+## Como fazer o build
+
+Para o build, você precisa ter node, e caso não esteja usando linux, escrever um script equivalente ao `finish-build.sh` para sua plataforma. O script é bem simples, e não deveria ser complexo de fazer.
+
+Projeto feito por `Arthur Bufalo`, `Augusto Oliveira`, `Gabriel Faccina` e `Taissa Moraes`

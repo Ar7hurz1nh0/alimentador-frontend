@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import Header from './components/header'
+import { HeaderProps } from './components/header'
 
-function App() {
+export const active: HeaderProps['active'] = 5
+
+export default function Index(): JSX.Element {
   const [count, setCount] = useState(0)
 
   return (<>
-    <Header active={1} />
-    <div className="App select-none">
+    <div className="App select-none" id='root'>
       <div className='grid grid-cols-2 gap-4 justify-items-center max-w-xs m-auto'>
         <div>
           <a href="https://vitejs.dev" target="_blank">
@@ -23,7 +24,7 @@ function App() {
       </div>
       <h1 className='font-black text-6xl antialiased'>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)} className='p-5 pt-3 pb-3 dark:bg-zinc-700'>
+        <button onClick={() => setCount((count) => count + 1)} className='p-5 pt-3 pb-3 dark:bg-zinc-700 border-zinc-800 border-2'>
           count is {count}
         </button>
         <p>
@@ -37,5 +38,3 @@ function App() {
   </>
   )
 }
-
-export default App

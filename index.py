@@ -3,7 +3,7 @@ from sys import argv
 from inspect import getmembers, isfunction
 from importlib import import_module
 from typing import Iterable, List
-from markdown import markdown, Markdown
+from markdown import Markdown
 from time import perf_counter
 from flask import Flask, Response, make_response, render_template, request, copy_current_request_context, after_this_request, send_file, abort, session, jsonify
 
@@ -167,7 +167,7 @@ for file in readDir('pages', '.md'):
   )
 
 
-default_routes: List[str] = ['/']
+default_routes: List[str] = ['/', '/list', '/register', '/post', '/dev', '/build']
 for route in default_routes:
   perf = [0, 0, 0]
   def injector(**_):

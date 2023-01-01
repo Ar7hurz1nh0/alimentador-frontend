@@ -18,4 +18,4 @@ def delete(self, req):
   self.res('DELETE: Hello World')
 
 def next():
-  print('this shouls print after')
+  print('this should print after')
